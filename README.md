@@ -1,5 +1,5 @@
 # TesteICTS
-Após iniciar o servidor será iniciado automaticamente.
+Após iniciar...
 
 ### Instruções
 1 - Clone o repositório, 
