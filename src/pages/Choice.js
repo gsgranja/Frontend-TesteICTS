@@ -5,15 +5,23 @@ const name = 'Dashboard ICTS';
 // Template separada da função, padronizando com outros frameworks e reduzindo a curva de aprendizado.
 
 const template = 
-  <section>
-<header className="choiceScreen">
-  <h1 className='tittle'>{name}</h1>
-  <div className="splashScreen">
-    <a href="/produtos"><img src={box} alt=""></img></a>
-        <img src={cart} alt=""></img>
+<div className="container">
+<div className="row">
+  <div className='column'>  
+    <h1 className='tittle'>{name}</h1>
   </div>
-</header>
-</section>;
+</div>
+<div className="row">
+  <div className='column'></div>
+  <div className='column'>
+    <a href="/compras"><img src={box} alt=""></img></a>
+  </div>
+  <div className='column'>
+  <a href="/produtos"><img src={cart} alt=""></img></a>
+  </div>
+  <div className='column'></div>
+</div>
+</div>;
 
 
 function App() {

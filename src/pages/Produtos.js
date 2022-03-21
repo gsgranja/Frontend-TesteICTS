@@ -1,33 +1,114 @@
-import box from '../assets/images/box.svg';
-import cart from '../assets/images/cart.svg';
-import ReactDOM from 'react-dom';
+import React, { useEffect, useState } from "react";
+import pencil from '../assets/images/pencil.svg';
+import xsquare from '../assets/images/xsquare.svg';
 
-const name = 'Josh Perez';
 
-// Template separada da função, padronizando com outros frameworks e reduzindo a curva de aprendizado.
-const template = 
-<section>
-<header class="choiceScreen">
-  <div class="flex items-center justify-between">
-    <h2 class="font-semibold text-slate-900">Projects</h2>
-    <a href="/new" class="hover:bg-blue-400 group flex items-center rounded-md bg-blue-500 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm">
-      <svg width="20" height="20" fill="currentColor" class="mr-2" aria-hidden="true">
-        <path d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z" />
-      </svg>
-      New
-    </a>
+export default function App() {
+const restEndpoint = "http://localhost:5000/produto";
+
+const callRestApi = async () => {
+const response = await fetch(restEndpoint);
+const jsonResponse = await response.json();
+return jsonResponse[0];
+};
+
+function RenderResult() {
+const [produtos, baixarProdutos] = useState('');
+
+useEffect(() => {
+callRestApi().then(
+result => baixarProdutos(result));
+},[]);
+
+var showModal = false;
+
+return(
+<div className="container">
+
+  <div className="modal">
+    <form action="">
+      <label>Nome Produto:</label><br />
+      <input className="border" type="text" id="nomep" name="produto" /><br />
+      <label>Descrição:</label><br />
+      <input className="border" type="text" id="nome" name="descricao" /><br />
+      <label>Preço</label><br />
+      <input className="border" type="text" id="nomepre" name="preco" /><br />
+      <input type="submit" value="Salvar" />
+    </form>
   </div>
-  <form class="group relative">
-    <svg width="20" height="20" fill="currentColor" class="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-blue-500" aria-hidden="true">
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
-    </svg>
-    <input class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm" type="text" aria-label="Filter projects" placeholder="Filter projects..."/>
-  </form>
-</header>
-</section>;
-  
-function App() {
-    return template
-}
 
-export default App;
+  <div className="row">
+    <div className="column">
+
+
+      <div className="row">
+        <div className="column column=10">
+          <a href="/"><button>Voltar</button></a>
+        </div>
+        <div className="column column-40"></div>
+        <div className="column column-10">
+          <a href="/"><button>Novo</button></a>
+        </div>
+      </div>
+
+
+      <h1 className='tittle'>Produtos</h1>
+
+      <label id="pesquisarProduto">Pesquisar Produto</label>
+
+      <form><input type="text" id="pesquisarProduto" /></form>
+
+
+    </div>
+  </div>
+
+  <div className="row">
+    <div className="column">
+      <div className="choiceScreen">
+        <table className="border">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NOME</th>
+              <th>DESCRIÇAO</th>
+              <th>PREÇO</th>
+              <th>CRIADO EM</th>
+              <th>ATUALIZADO EM</th>
+              <th>AÇÕES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {Object.values(produtos).map((valor, i) => (
+              <td key={i}>
+                {valor}
+              </td>
+              ))}
+
+              <td>
+                <div className="row">
+                  <div className="column">
+                      <img  src={pencil}></img>
+                  </div>    
+                  <div className="column">
+                    <img  src={xsquare}></img>
+                </div>                   
+                </div>
+                
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+);
+}
+return RenderResult()
+}
