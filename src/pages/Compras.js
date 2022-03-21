@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTable } from 'react-table'
 import pencil from '../assets/images/pencil.svg';
 import xsquare from '../assets/images/xsquare.svg';
-import Tabela from '../components/Tabela'
+import Tabela from '../components/TabelaCompras'
 
 
 

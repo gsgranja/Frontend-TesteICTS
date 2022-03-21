@@ -12,7 +12,6 @@ async function buscarPorId(id){
 }
 
 export default function ModalCompra(props){  
-  alert(props.compra.compras)
   var compra = props.compra.compras; 
   var produto = buscarPorId(compra.id);
   var template = 

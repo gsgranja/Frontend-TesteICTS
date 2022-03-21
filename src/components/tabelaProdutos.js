@@ -2,18 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { useTable } from 'react-table';
-import ModalCompra from '../components/ModalCompra'
 
-export default function Tabela(compras) {    
+export default function Tabela(produtos) {    
     var data = []
-    Object.values(compras.compras).map((valor)=>
+    var produto = ""
+    Object.values(produtos.produtos).map((valor)=>
     data.push(
     {
         id: valor.id,
-        tipo_pagamento: valor.tipo_pagamento,
-        total: valor.total,
-        status: valor.status,
-        produtoId: valor.produtoId,
+        nome: valor.nome,
+        descricao: valor.descricao,
+        preco: valor.preco,        
         updatedAt: valor.updatedAt,
         createdAt: valor.createdAt
     } )
@@ -32,20 +31,23 @@ export default function Tabela(compras) {
          accessor: 'id', // accessor is the "key" in the data
        },
        {
-         Header: 'Tipo Pagamento',
-         accessor: 'tipo_pagamento',
+         Header: 'Nome',
+         accessor: 'nome',
        },
        {
-        Header: 'Valor Total',
-        accessor: 'total',
+        Header: 'Descrição',
+        accessor: 'descricao',
       },
       {
-        Header: 'Status',
-        accessor: 'status',
+        Header: 'Preço',
+        accessor: 'preco',
       },
       {
-        Header: 'Produto Id',
-        accessor: 'produtoId',
+        Header: 'Criado em',
+        accessor: 'createdAt',
+      },{
+        Header: 'Atualizado',
+        accessor: 'updatedAt',
       },{
         Header: 'Ações',
         accessor: 'action',
@@ -71,7 +73,6 @@ export default function Tabela(compras) {
  
    return (
        <>
-    <ModalCompra classname="modal" compra={compras} />
      <table {...getTableProps()}>
        <thead>
          {headerGroups.map(headerGroup => (
